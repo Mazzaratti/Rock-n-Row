@@ -3,434 +3,382 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Mazzaratti — ROCK-Artist-BINGO (SET #1)</title>
+<title>Mazzaratti — Rock & Row Card (SET #1)</title>
+
 <style>
-  :root {
-    --bg: #ffffff;
-    --card: #f7f7f7;
-    --text: #222;
-    --accent: #d1382a;
-    --border: #ccc;
-    --cell: #fcfcfc;
-    --check: #2a7a3b;
-  }
-  html, body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-  }
-  .wrap {
-    max-width: 760px;
-    margin: 14px auto 22px;
-    padding: 0 14px;
-    text-align: center;
-  }
-  .logo {
-    width: 100%;
-    max-width: 600px;
-    margin: 6px auto 8px;
-  }
-  .logo img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-  h2 {
-    margin: 6px 0 14px;
-    font-size: clamp(24px, 6vw, 42px);
-    font-weight: 900;
-    letter-spacing: .5px;
-    line-height: 1.05;
-  }
-  .card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px;
-    margin: 0 auto 14px;
-    box-shadow: 0 6px 24px rgba(0,0,0,.06);
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-  .cell {
-    position: relative;
-    background: var(--cell);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    min-height: 110px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    transition: transform .08s ease;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .cell:active { transform: scale(0.99) }
+:root{
+ --bg:#ffffff;
+ --card:#f7f7f7;
+ --text:#222;
+ --accent:#d1382a;
+ --border:#ccc;
+ --cell:#fcfcfc;
+ --check:#2a7a3b;
+}
 
-  .artist {
-    font-weight: 800;
-    font-size: clamp(16px, 3.7vw, 22px);
-    line-height: 1.2;
-    padding: 0 4px;
-  }
+html,body{
+ margin:0;
+ background:var(--bg);
+ color:var(--text);
+ font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+}
 
-  /* Center dropdown styling */
-  .riffWrap{
-    width: 100%;
-    display: grid;
-    gap: 8px;
-    align-items: center;
-    justify-items: center;
-  }
-  .riffLabel{
-    font-weight: 900;
-    font-size: 14px;
-    letter-spacing: .3px;
-  }
-  select.riffSelect{
-    width: 100%;
-    max-width: 220px;
-    font-size: 16px;
-    padding: 10px 10px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: #fff;
-  }
-  .riffNote{
-    font-size: 12px;
-    color: #666;
-    line-height: 1.15;
-  }
+.wrap{
+ max-width:760px;
+ margin:14px auto 22px;
+ padding:0 14px;
+ text-align:center;
+}
 
-  /* checkbox overlay */
-  .mark {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    border-radius: 8px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity .15s ease;
-  }
-  .mark::before {
-    content: "✓";
-    font-size: clamp(48px, 10vw, 72px);
-    color: var(--check);
-    text-shadow: 0 2px 0 #fff;
-    filter: drop-shadow(0 2px 2px rgba(0,0,0,.15));
-  }
-  .cell.checked .mark { opacity: 1 }
+.logo{
+ width:100%;
+ max-width:600px;
+ margin:6px auto 8px;
+}
 
-  /* “disabled until selection” feel */
-  .cell.center.unpicked {
-    outline: 2px dashed #ddd;
-    outline-offset: -6px;
-  }
+.logo img{
+ width:100%;
+ height:auto;
+ object-fit:contain;
+}
 
-  .hint {
-    margin-top: 8px;
-    color: #666;
-    font-size: 12px;
-  }
+h2{
+ margin:6px 0 14px;
+ font-size:clamp(24px,6vw,42px);
+ font-weight:900;
+ letter-spacing:.5px;
+ line-height:1.05;
+}
+
+.card{
+ background:#fff;
+ border:1px solid var(--border);
+ border-radius:10px;
+ padding:14px;
+ margin:0 auto 14px;
+ box-shadow:0 6px 24px rgba(0,0,0,.06);
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:8px;
+}
+
+.cell{
+ position:relative;
+ background:var(--cell);
+ border:1px solid var(--border);
+ border-radius:8px;
+ min-height:110px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:10px;
+ transition:transform .08s ease;
+ user-select:none;
+ -webkit-tap-highlight-color:transparent;
+}
+
+.cell:active{transform:scale(.99)}
+
+.artist{
+ font-weight:800;
+ font-size:clamp(16px,3.7vw,22px);
+ line-height:1.2;
+ padding:0 4px;
+}
+
+/* checkmark */
+
+.mark{
+ position:absolute;
+ inset:0;
+ display:grid;
+ place-items:center;
+ border-radius:8px;
+ pointer-events:none;
+ opacity:0;
+ transition:opacity .15s ease;
+}
+
+.mark::before{
+ content:"✓";
+ font-size:clamp(48px,10vw,72px);
+ color:var(--check);
+ text-shadow:0 2px 0 #fff;
+ filter:drop-shadow(0 2px 2px rgba(0,0,0,.15));
+}
+
+.cell.checked .mark{opacity:1}
+
+.hint{
+ margin-top:8px;
+ color:#666;
+ font-size:12px;
+}
 </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="logo"><img id="logo" alt="Mazzaratti logo" src="assets/Non-Bordered Logo.jpg"></div>
-    <h2 id="title">ROCK-Artist-BINGO<br>SET #1-BLACKOUT</h2>
 
-    <div class="card">
-      <div id="grid" class="grid" aria-label="Rock & Row 3x3 card"></div>
-    </div>
+<div class="wrap">
 
-    <div class="hint">
-      Tap squares to mark ✓. Center square: pick the band that matches the riff.
-      (Long-press title for a new card.)
-    </div>
-  </div>
+<div class="logo">
+<img alt="Mazzaratti logo" src="assets/Non-Bordered Logo.jpg">
+</div>
+
+<h2 id="title">ROCK-Artist-BINGO<br>SET #1-BLACKOUT</h2>
+
+<div class="card">
+<div id="grid" class="grid"></div>
+</div>
+
+<div class="hint">
+Tap squares to mark ✓. (Long-press title for a new card.)
+</div>
+
+</div>
 
 <script>
-/* ======= Persisted card per set, tap-to-check, long-press for new card ======= */
 
-const SET_ID = 'set1';
-const CARD_KEY = `rr_current_card_${SET_ID}_v1`;        // stores the 8 random artists
-const RIFF_KEY = `riff_choice_${SET_ID}_v1`;            // stores dropdown selection
+const SET_ID='set1'
+const CARD_KEY=`rr_current_card_${SET_ID}_v1`
 
-// Card pool (random 8)
-const ARTISTS = Array.from(new Set([
-  "Simple Minds", "Collective Soul", "Missing Persons", "Til Tuesday", "HEART", "The Pretenders",
-  "Journey", "Billy Squire", "Weezer", "The B52s", "Scandal", "Pat Benatar", "Georgia Sattelites",
-  "The Smithereens", "Wheatus", "Quarterflash", "Tom Petty", "Miley Cyrus", "Elle King",
-  "Gin Blossoms", "Kim Carnes", "The Cult", "Post Selfie w/Band"
-]));
+const ARTISTS=Array.from(new Set([
 
-// Dropdown “riff answer” pool (separate list)
-const RIFF_BANDS = Array.from(new Set([
-  "Aerosmith","Bon Jovi","Boston","Cream","Deep Purple","Def Leppard",
-  "Eagles","Fleetwood Mac","Foreigner","Guns N' Roses","Jimi Hendrix",
-  "Metallica","Nirvana","Ozzy Osbourne","Queen","Rush",
-  "Santana","The Rolling Stones","ZZ Top"
-])).sort((a,b)=>a.localeCompare(b));
+"Simple Minds","Collective Soul","Missing Persons","Til Tuesday","HEART","The Pretenders",
+"Journey","Billy Squire","Weezer","The B52s","Scandal","Pat Benatar","Georgia Sattelites",
+"The Smithereens","Wheatus","Quarterflash","Tom Petty","Miley Cyrus","Elle King",
+"Gin Blossoms","Kim Carnes","The Cult","Post Selfie w/Band"
 
-const gridEl = document.getElementById('grid');
-const titleEl = document.getElementById('title');
+]))
 
-let currentArtists = []; // 8 artists only (center is dropdown)
-let holdTimer = null;
+const gridEl=document.getElementById('grid')
+const titleEl=document.getElementById('title')
 
-/* ---------- Randomizer ---------- */
+let currentArtists=[]
+let holdTimer=null
 
-// Pick N unique
-function pickN(n) {
-  const arr = ARTISTS.slice();
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr.slice(0, n);
+
+/* RANDOM CARD */
+
+function pickNine(){
+
+ const arr=ARTISTS.slice()
+
+ for(let i=arr.length-1;i>0;i--){
+
+  const j=Math.floor(Math.random()*(i+1))
+  ;[arr[i],arr[j]]=[arr[j],arr[i]]
+
+ }
+
+ return arr.slice(0,9)
+
 }
 
-/* ---------- Rendering ---------- */
 
-function renderGrid(eightArtists) {
-  gridEl.innerHTML = "";
+/* GRID */
 
-  // Build a 9-slot layout with center as dropdown
-  // Indices: 0 1 2
-  //          3 4 5   (4 is center)
-  //          6 7 8
-  const slots = new Array(9).fill(null);
+function renderGrid(artists){
 
-  // Fill non-center slots with the 8 artists
-  const nonCenterIdx = [0,1,2,3,5,6,7,8];
-  nonCenterIdx.forEach((slotIndex, i) => {
-    slots[slotIndex] = { type: 'artist', name: eightArtists[i] };
-  });
+ gridEl.innerHTML=""
 
-  // Center slot
-  slots[4] = { type: 'riff' };
+ artists.forEach((name,idx)=>{
 
-  slots.forEach((slot, idx) => {
-    const cell = document.createElement('div');
-    cell.className = 'cell';
-    cell.dataset.idx = idx;
+  const cell=document.createElement('div')
+  cell.className='cell'
+  cell.dataset.idx=idx
 
-    if (slot.type === 'artist') {
-      const span = document.createElement('div');
-      span.className = 'artist';
-      span.textContent = slot.name;
+  const span=document.createElement('div')
+  span.className='artist'
+  span.textContent=name
 
-      const mark = document.createElement('div');
-      mark.className = 'mark';
+  const mark=document.createElement('div')
+  mark.className='mark'
 
-      cell.appendChild(span);
-      cell.appendChild(mark);
-    } else {
-      // Center dropdown cell
-      cell.classList.add('center');
+  cell.appendChild(span)
+  cell.appendChild(mark)
 
-      const wrap = document.createElement('div');
-      wrap.className = 'riffWrap';
+  gridEl.appendChild(cell)
 
-      const label = document.createElement('div');
-      label.className = 'riffLabel';
-      label.textContent = 'RIFF GUESS';
+ })
 
-      const select = document.createElement('select');
-      select.className = 'riffSelect';
-      select.id = 'riffSelect';
+ restoreChecks()
 
-      const opt0 = document.createElement('option');
-      opt0.value = '';
-      opt0.textContent = 'Select band…';
-      select.appendChild(opt0);
-
-      RIFF_BANDS.forEach(b => {
-        const opt = document.createElement('option');
-        opt.value = b;
-        opt.textContent = b;
-        select.appendChild(opt);
-      });
-
-      const note = document.createElement('div');
-      note.className = 'riffNote';
-      note.textContent = 'Pick the band that matches the riff.';
-
-      const mark = document.createElement('div');
-      mark.className = 'mark';
-
-      wrap.appendChild(label);
-      wrap.appendChild(select);
-      wrap.appendChild(note);
-
-      cell.appendChild(wrap);
-      cell.appendChild(mark);
-
-      // Restore saved selection
-      const savedChoice = loadRiffChoice();
-      if (savedChoice) select.value = savedChoice;
-
-      // Add “unpicked” style if empty
-      if (!select.value) cell.classList.add('unpicked');
-
-      // Persist choice on change
-      select.addEventListener('change', () => {
-        saveRiffChoice(select.value);
-        if (select.value) cell.classList.remove('unpicked');
-        else cell.classList.add('unpicked');
-
-        // If it was checked but user cleared selection, uncheck it
-        if (!select.value && cell.classList.contains('checked')) {
-          cell.classList.remove('checked');
-          persistChecks();
-        }
-      });
-    }
-
-    gridEl.appendChild(cell);
-  });
-
-  restoreChecks();
 }
 
-/* ---------- Click / Check logic ---------- */
 
-function isCenterCell(el) {
-  return Number(el.dataset.idx) === 4;
+/* CLICK */
+
+function toggleCell(el){
+
+ el.classList.toggle('checked')
+ persistChecks()
+
 }
 
-function canCheckCenter() {
-  const v = loadRiffChoice();
-  return !!v;
+gridEl.addEventListener('click',(e)=>{
+
+ const cell=e.target.closest('.cell')
+ if(!cell)return
+
+ toggleCell(cell)
+
+})
+
+
+/* STORAGE */
+
+function storageKey(){
+
+ const key=currentArtists.join('|')
+ return `rr_checks_${SET_ID}_`+hashCode(key)
+
 }
 
-function toggleCell(el) {
-  // Center rule: can’t check until a band is selected
-  if (isCenterCell(el) && !canCheckCenter()) return;
+function persistChecks(){
 
-  el.classList.toggle('checked');
-  persistChecks();
+ const checked=Array.from(gridEl.children).map(c=>c.classList.contains('checked')?1:0)
+
+ localStorage.setItem(storageKey(),JSON.stringify(checked))
+
 }
 
-// Tap handler (ignore taps inside select itself)
-gridEl.addEventListener('click', (e) => {
-  if (e.target && e.target.tagName === 'SELECT') return;
-  const cell = e.target.closest('.cell');
-  if (!cell) return;
-  toggleCell(cell);
-});
+function restoreChecks(){
 
-/* ---------- Storage: checks ---------- */
+ try{
 
-// Keyed to this card + riff choice + set (so checks match what’s on screen)
-function storageKey() {
-  const key = currentArtists.join('|') + '||riff:' + (loadRiffChoice() || '');
-  return `rr_checks_${SET_ID}_` + hashCode(key);
+  const raw=localStorage.getItem(storageKey())
+  if(!raw)return
+
+  const arr=JSON.parse(raw)
+
+  Array.from(gridEl.children).forEach((c,i)=>{
+
+   if(arr[i])c.classList.add('checked')
+
+  })
+
+ }catch{}
+
 }
 
-function persistChecks() {
-  const checked = Array.from(gridEl.children).map(c => c.classList.contains('checked') ? 1 : 0);
-  localStorage.setItem(storageKey(), JSON.stringify(checked));
+
+/* HASH */
+
+function hashCode(s){
+
+ let h=0
+
+ for(let i=0;i<s.length;i++){
+
+  h=((h<<5)-h+s.charCodeAt(i))|0
+
+ }
+
+ return Math.abs(h)
+
 }
 
-function restoreChecks() {
-  try {
-    const raw = localStorage.getItem(storageKey());
-    if (!raw) return;
-    const arr = JSON.parse(raw);
-    Array.from(gridEl.children).forEach((c, i) => {
-      if (arr[i]) c.classList.add('checked');
-    });
-  } catch {}
+
+/* CARD PERSISTENCE */
+
+function saveCurrentCard(){
+
+ try{
+
+  localStorage.setItem(CARD_KEY,JSON.stringify(currentArtists))
+
+ }catch{}
+
 }
 
-// Simple string hash
-function hashCode(s) {
-  let h = 0;
-  for (let i = 0; i < s.length; i++) {
-    h = ((h << 5) - h + s.charCodeAt(i)) | 0;
-  }
-  return Math.abs(h);
+function loadSavedCard(){
+
+ try{
+
+  const raw=localStorage.getItem(CARD_KEY)
+  if(!raw)return null
+
+  const arr=JSON.parse(raw)
+
+  if(!Array.isArray(arr)||arr.length!==9)return null
+  if(new Set(arr).size!==9)return null
+
+  for(const n of arr)
+
+   if(typeof n!=='string'||!ARTISTS.includes(n))return null
+
+  return arr
+
+ }catch{
+
+  return null
+
+ }
+
 }
 
-/* ---------- Storage: card (8 artists) ---------- */
 
-function saveCurrentCard() {
-  try { localStorage.setItem(CARD_KEY, JSON.stringify(currentArtists)); } catch {}
+/* NEW CARD */
+
+function newCard(){
+
+ currentArtists=pickNine()
+
+ saveCurrentCard()
+
+ renderGrid(currentArtists)
+
 }
 
-function loadSavedCard() {
-  try {
-    const raw = localStorage.getItem(CARD_KEY);
-    if (!raw) return null;
-    const arr = JSON.parse(raw);
 
-    // Validate: 8 unique strings that exist in ARTISTS
-    if (!Array.isArray(arr) || arr.length !== 8) return null;
-    if (new Set(arr).size !== 8) return null;
-    for (const n of arr) if (typeof n !== 'string' || !ARTISTS.includes(n)) return null;
+/* LONG PRESS */
 
-    return arr;
-  } catch {
-    return null;
-  }
+titleEl.addEventListener('touchstart',startHold,{passive:true})
+titleEl.addEventListener('mousedown',startHold)
+titleEl.addEventListener('touchend',clearHold)
+titleEl.addEventListener('mouseup',clearHold)
+titleEl.addEventListener('mouseleave',clearHold)
+
+function startHold(){
+
+ clearHold()
+
+ holdTimer=setTimeout(()=>{newCard()},1200)
+
 }
 
-/* ---------- Storage: riff dropdown ---------- */
+function clearHold(){
 
-function saveRiffChoice(val) {
-  try { localStorage.setItem(RIFF_KEY, val || ''); } catch {}
+ if(holdTimer){
+
+  clearTimeout(holdTimer)
+  holdTimer=null
+
+ }
+
 }
 
-function loadRiffChoice() {
-  try {
-    const v = localStorage.getItem(RIFF_KEY);
-    return v ? String(v) : '';
-  } catch {
-    return '';
-  }
+
+/* INIT */
+
+const saved=loadSavedCard()
+
+if(saved){
+
+ currentArtists=saved
+ renderGrid(currentArtists)
+
+}else{
+
+ newCard()
+
 }
 
-/* ---------- New card ---------- */
-
-function newCard() {
-  currentArtists = pickN(8);
-  saveCurrentCard();
-  renderGrid(currentArtists);
-}
-
-/* ---------- Long-press title for new card ---------- */
-
-titleEl.addEventListener('touchstart', startHold, { passive: true });
-titleEl.addEventListener('mousedown', startHold);
-titleEl.addEventListener('touchend', clearHold);
-titleEl.addEventListener('mouseup', clearHold);
-titleEl.addEventListener('mouseleave', clearHold);
-
-function startHold() {
-  clearHold();
-  holdTimer = setTimeout(() => { newCard(); }, 1200);
-}
-function clearHold() {
-  if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
-}
-
-/* ---------- INIT ---------- */
-
-const saved = loadSavedCard();
-if (saved) {
-  currentArtists = saved;
-  renderGrid(currentArtists);
-} else {
-  newCard();
-}
 </script>
+
 </body>
 </html>
-

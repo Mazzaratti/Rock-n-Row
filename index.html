@@ -3,379 +3,340 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Mazzaratti — Rock & Row Card (SET #1)</title>
-
+<title>Mazzaratti — Rock & Row Card (SET #2)</title>
 <style>
-:root{
- --bg:#ffffff;
- --card:#f7f7f7;
- --text:#222;
- --accent:#d1382a;
- --border:#ccc;
- --cell:#fcfcfc;
- --check:#2a7a3b;
-}
+  :root {
+    --bg: #ffffff;
+    --text: #222;
+    --border: #ccc;
+    --cell: #fcfcfc;
+    --check: #2a7a3b;
+  }
 
-html,body{
- margin:0;
- background:var(--bg);
- color:var(--text);
- font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-}
+  html, body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  }
 
-.wrap{
- max-width:760px;
- margin:14px auto 22px;
- padding:0 14px;
- text-align:center;
-}
+  .wrap {
+    max-width: 760px;
+    margin: 14px auto 22px;
+    padding: 0 14px;
+    text-align: center;
+  }
 
-.logo{
- width:100%;
- max-width:600px;
- margin:6px auto 8px;
-}
+  .logo {
+    width: 100%;
+    max-width: 600px;
+    margin: 6px auto 8px;
+  }
 
-.logo img{
- width:100%;
- height:auto;
- object-fit:contain;
-}
+  .logo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
 
-h2{
- margin:6px 0 14px;
- font-size:clamp(24px,6vw,42px);
- font-weight:900;
- letter-spacing:.5px;
- line-height:1.05;
-}
+  h2 {
+    margin: 6px 0 14px;
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: 900;
+    letter-spacing: .5px;
+  }
 
-.card{
- background:#fff;
- border:1px solid var(--border);
- border-radius:10px;
- padding:14px;
- margin:0 auto 14px;
- box-shadow:0 6px 24px rgba(0,0,0,.06);
-}
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    margin: 0 auto 14px;
+    box-shadow: 0 6px 24px rgba(0,0,0,.06);
+  }
 
-.grid{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:8px;
-}
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
 
-.cell{
- position:relative;
- background:var(--cell);
- border:1px solid var(--border);
- border-radius:8px;
- min-height:110px;
- display:flex;
- align-items:center;
- justify-content:center;
- padding:10px;
- transition:transform .08s ease;
- user-select:none;
- -webkit-tap-highlight-color:transparent;
-}
+  .cell {
+    position: relative;
+    background: var(--cell);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    min-height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
 
-.cell:active{transform:scale(.99)}
+  .cell:active {
+    transform: scale(0.99);
+  }
 
-.artist{
- font-weight:800;
- font-size:clamp(16px,3.7vw,22px);
- line-height:1.2;
- padding:0 4px;
-}
+  .artist {
+    font-weight: 800;
+    font-size: clamp(16px, 3.7vw, 22px);
+    line-height: 1.2;
+    padding: 0 4px;
+  }
 
-/* checkmark */
+  .mark {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .15s ease;
+  }
 
-.mark{
- position:absolute;
- inset:0;
- display:grid;
- place-items:center;
- border-radius:8px;
- pointer-events:none;
- opacity:0;
- transition:opacity .15s ease;
-}
+  .mark::before {
+    content: "✓";
+    font-size: clamp(48px, 10vw, 72px);
+    color: var(--check);
+    text-shadow: 0 2px 0 #fff;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,.15));
+  }
 
-.mark::before{
- content:"✓";
- font-size:clamp(48px,10vw,72px);
- color:var(--check);
- text-shadow:0 2px 0 #fff;
- filter:drop-shadow(0 2px 2px rgba(0,0,0,.15));
-}
+  .cell.checked .mark {
+    opacity: 1;
+  }
 
-.cell.checked .mark{opacity:1}
-
-.hint{
- margin-top:8px;
- color:#666;
- font-size:12px;
-}
+  .hint {
+    margin-top: 8px;
+    color: #666;
+    font-size: 12px;
+  }
 </style>
 </head>
 
 <body>
+  <div class="wrap">
+    <div class="logo">
+      <img id="logo" alt="Mazzaratti logo" src="assets/Non-Bordered Logo.jpg">
+    </div>
 
-<div class="wrap">
+    <h2 id="title">ROCK &amp; ROW<br>SET #2-BLACKOUT</h2>
 
-<div class="logo">
-<img alt="Mazzaratti logo" src="assets/Non-Bordered Logo.jpg">
-</div>
+    <div class="card">
+      <div id="grid" class="grid" aria-label="Rock & Row 3x3 card"></div>
+    </div>
 
-<h2 id="title">ROCK-Artist-BINGO<br>SET #1-BLACKOUT</h2>
-
-<div class="card">
-<div id="grid" class="grid"></div>
-</div>
-
-<div class="hint">
-Tap squares to mark ✓. (Long-press title for a new card.)
-</div>
-
-</div>
+    <div class="hint">Tap a square to mark it ✓. Your card is locked for this show.</div>
+  </div>
 
 <script>
+/*
+  CHANGE THIS FOR EVERY NEW SHOW / NEW BAND LIST.
 
-const SET_ID='set1'
-const CARD_KEY=`rr_current_card_${SET_ID}_v1`
+  Example:
+  const SHOW_ID = 'show_2026_05_22_set2';
 
-const ARTISTS=Array.from(new Set([
+  Same SHOW_ID = same locked card.
+  New SHOW_ID = fresh card for that show.
+*/
+const SHOW_ID = 'show_2026_05_22_set2';
 
-"Simple Minds","The B-52s","Missing Persons","Til Tuesday","The Pretenders","Weezer","Chappell Roan","Madonna","Divinyls","The Cardigans","Better Than Ezra","Miley Cyrus","Kelly Clarkson","Veruca Salt","No Doubt","Tom Petty","Billy Squier","Journey","Led Zeppelin","HEART","Ozzy Osbourne","Post Selfie w/Band","Moonwalk By Stage"
+const CARD_KEY = `rr_current_card_${SHOW_ID}_v1`;
 
-]))
+const ARTISTS = Array.from(new Set([
+  "Shania Twain",
+  "Elle King",
+  "Miranda Lambert",
+  "The Cars",
+  "INXS",
+  "Berlin",
+  "Quarterflash",
+  "Scandal",
+  "Kim Carnes",
+  "The Cult",
+  "Collective Soul",
+  "Concrete Blonde",
+  "Talking Heads",
+  "Stevie Nicks",
+  "The Offspring",
+  "Pat Benatar",
+  "Georgia Satellites",
+  "AC/DC",
+  "Styx",
+  "Lit",
+  "4 NonBlondes",
+  "Post Selfie w/Band",
+  "Air Guitar Solo During Song",
+  "Moonwalk Near Stage"
+]));
 
-const gridEl=document.getElementById('grid')
-const titleEl=document.getElementById('title')
+const gridEl = document.getElementById('grid');
 
-let currentArtists=[]
-let holdTimer=null
+let currentArtists = [];
 
-
-/* RANDOM CARD */
-
-function pickNine(){
-
- const arr=ARTISTS.slice()
-
- for(let i=arr.length-1;i>0;i--){
-
-  const j=Math.floor(Math.random()*(i+1))
-  ;[arr[i],arr[j]]=[arr[j],arr[i]]
-
- }
-
- return arr.slice(0,9)
-
+function safeSetItem(key, value) {
+  try {
+    localStorage.setItem(key, value);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
-
-/* GRID */
-
-function renderGrid(artists){
-
- gridEl.innerHTML=""
-
- artists.forEach((name,idx)=>{
-
-  const cell=document.createElement('div')
-  cell.className='cell'
-  cell.dataset.idx=idx
-
-  const span=document.createElement('div')
-  span.className='artist'
-  span.textContent=name
-
-  const mark=document.createElement('div')
-  mark.className='mark'
-
-  cell.appendChild(span)
-  cell.appendChild(mark)
-
-  gridEl.appendChild(cell)
-
- })
-
- restoreChecks()
-
+function safeGetItem(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
 }
 
+function hashCode(s) {
+  let h = 0;
 
-/* CLICK */
+  for (let i = 0; i < s.length; i++) {
+    h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+  }
 
-function toggleCell(el){
-
- el.classList.toggle('checked')
- persistChecks()
-
+  return Math.abs(h);
 }
 
-gridEl.addEventListener('click',(e)=>{
+function pickNine() {
+  const arr = ARTISTS.slice();
 
- const cell=e.target.closest('.cell')
- if(!cell)return
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+  }
 
- toggleCell(cell)
-
-})
-
-
-/* STORAGE */
-
-function storageKey(){
-
- const key=currentArtists.join('|')
- return `rr_checks_${SET_ID}_`+hashCode(key)
-
+  return arr.slice(0, 9);
 }
 
-function persistChecks(){
-
- const checked=Array.from(gridEl.children).map(c=>c.classList.contains('checked')?1:0)
-
- localStorage.setItem(storageKey(),JSON.stringify(checked))
-
+function storageKey() {
+  return `rr_checks_${SHOW_ID}_` + hashCode(currentArtists.join('|'));
 }
 
-function restoreChecks(){
-
- try{
-
-  const raw=localStorage.getItem(storageKey())
-  if(!raw)return
-
-  const arr=JSON.parse(raw)
-
-  Array.from(gridEl.children).forEach((c,i)=>{
-
-   if(arr[i])c.classList.add('checked')
-
-  })
-
- }catch{}
-
+function saveCurrentCard() {
+  safeSetItem(CARD_KEY, JSON.stringify(currentArtists));
 }
 
+function loadSavedCard() {
+  const raw = safeGetItem(CARD_KEY);
 
-/* HASH */
+  if (!raw) {
+    return null;
+  }
 
-function hashCode(s){
+  try {
+    const arr = JSON.parse(raw);
 
- let h=0
+    if (!Array.isArray(arr)) return null;
+    if (arr.length !== 9) return null;
+    if (new Set(arr).size !== 9) return null;
 
- for(let i=0;i<s.length;i++){
+    for (const name of arr) {
+      if (typeof name !== 'string') return null;
+      if (!ARTISTS.includes(name)) return null;
+    }
 
-  h=((h<<5)-h+s.charCodeAt(i))|0
-
- }
-
- return Math.abs(h)
-
+    return arr;
+  } catch {
+    return null;
+  }
 }
 
+function persistChecks() {
+  const checked = Array.from(gridEl.children).map(cell => {
+    return cell.classList.contains('checked') ? 1 : 0;
+  });
 
-/* CARD PERSISTENCE */
-
-function saveCurrentCard(){
-
- try{
-
-  localStorage.setItem(CARD_KEY,JSON.stringify(currentArtists))
-
- }catch{}
-
+  safeSetItem(storageKey(), JSON.stringify(checked));
 }
 
-function loadSavedCard(){
+function restoreChecks() {
+  const raw = safeGetItem(storageKey());
 
- try{
+  if (!raw) {
+    return;
+  }
 
-  const raw=localStorage.getItem(CARD_KEY)
-  if(!raw)return null
+  try {
+    const checked = JSON.parse(raw);
 
-  const arr=JSON.parse(raw)
-
-  if(!Array.isArray(arr)||arr.length!==9)return null
-  if(new Set(arr).size!==9)return null
-
-  for(const n of arr)
-
-   if(typeof n!=='string'||!ARTISTS.includes(n))return null
-
-  return arr
-
- }catch{
-
-  return null
-
- }
-
+    Array.from(gridEl.children).forEach((cell, i) => {
+      if (checked[i]) {
+        cell.classList.add('checked');
+      }
+    });
+  } catch {}
 }
 
+function renderGrid(artists) {
+  gridEl.innerHTML = "";
 
-/* NEW CARD */
+  artists.forEach((name, idx) => {
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+    cell.dataset.idx = idx;
 
-function newCard(){
+    const span = document.createElement('div');
+    span.className = 'artist';
+    span.textContent = name;
 
- currentArtists=pickNine()
+    const mark = document.createElement('div');
+    mark.className = 'mark';
 
- saveCurrentCard()
+    cell.appendChild(span);
+    cell.appendChild(mark);
+    gridEl.appendChild(cell);
+  });
 
- renderGrid(currentArtists)
-
+  restoreChecks();
 }
 
-
-/* LONG PRESS */
-
-titleEl.addEventListener('touchstart',startHold,{passive:true})
-titleEl.addEventListener('mousedown',startHold)
-titleEl.addEventListener('touchend',clearHold)
-titleEl.addEventListener('mouseup',clearHold)
-titleEl.addEventListener('mouseleave',clearHold)
-
-function startHold(){
-
- clearHold()
-
- holdTimer=setTimeout(()=>{newCard()},1200)
-
+function createFirstCardOnly() {
+  currentArtists = pickNine();
+  saveCurrentCard();
+  renderGrid(currentArtists);
 }
 
-function clearHold(){
+gridEl.addEventListener('click', function(e) {
+  const cell = e.target.closest('.cell');
 
- if(holdTimer){
+  if (!cell) {
+    return;
+  }
 
-  clearTimeout(holdTimer)
-  holdTimer=null
+  cell.classList.toggle('checked');
+  persistChecks();
+});
 
- }
+document.addEventListener('visibilitychange', function() {
+  if (document.visibilityState === 'hidden') {
+    persistChecks();
+    saveCurrentCard();
+  }
+});
 
+window.addEventListener('pagehide', function() {
+  persistChecks();
+  saveCurrentCard();
+});
+
+const savedCard = loadSavedCard();
+
+if (savedCard) {
+  currentArtists = savedCard;
+  renderGrid(currentArtists);
+} else {
+  createFirstCardOnly();
 }
-
-
-/* INIT */
-
-const saved=loadSavedCard()
-
-if(saved){
-
- currentArtists=saved
- renderGrid(currentArtists)
-
-}else{
-
- newCard()
-
-}
-
 </script>
-
 </body>
 </html>
